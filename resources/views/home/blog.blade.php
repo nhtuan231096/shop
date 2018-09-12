@@ -33,17 +33,20 @@
                   @endforeach
                   <div class="mt-30">
                     <div class="ps-pagination">
-                      <ul class="pagination">
-                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                      <div class="pagination">
+                        {{$blog->links()}}
+                       <!--  <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
                         <li class="active"><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">...</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                      </ul>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
+                      </div>
+
                     </div>
                   </div>
                 </div>
+
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
                   <aside class="ps-widget--sidebar ps-widget--search">
                     <form class="ps-search--widget" action="http://nouthemes.com/html/trueshoes/do_action" method="post">

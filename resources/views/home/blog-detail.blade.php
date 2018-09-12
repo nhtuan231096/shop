@@ -22,7 +22,7 @@
                     </div>
                     <div class="ps-post__footer">
                       <p class="ps-post__tags"><i class="fa fa-tags"></i><a href="blog-list.html">Man shoe</a>,<a href="blog-list.html"> Woman</a>,<a href="blog-list.html"> Nike</a></p>
-                      <div class="ps-post__actions"><span><i class="fa fa-comments"></i> 23 Comments</span><span><i class="fa fa-heart"></i>  likes</span>
+                      <div class="ps-post__actions"><span><i class="fa fa-comments"></i> {{$blog->comment->count()}} Comments</span><span><i class="fa fa-heart"></i>  likes</span>
                         <div class="ps-post__social"><i class="fa fa-share-alt"></i><a href="#">Share</a>
                           <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -35,7 +35,7 @@
                   </div>
                   <div class="ps-comments">
                     <h3>Comment({{$blog->comment->count()}})</h3>
-                    @foreach($blog->comment as $cmt)
+                    @foreach($comments as $cmt)
                     <div class="ps-comment">
                       <div class="ps-comment__thumbnail"><img src="{{url('uploads/user')}}/{{$cmt->user->image}}" alt="Ảnh đại diện"></div>
                       <div class="ps-comment__content">
@@ -46,6 +46,7 @@
                       </div>
                     </div>
                     @endforeach
+                    {{$comments->links()}}
                     <!-- <div class="ps-comment ps-comment--reply">
                       <div class="ps-comment__thumbnail"><img src="{{url('public')}}/home/images/user/3.jpg" alt=""></div>
                       <div class="ps-comment__content">
@@ -178,24 +179,6 @@
           </div>
         </div>
       </div>
-      <div class="ps-subscribe">
-        <div class="ps-container">
-          <div class="row">
-                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
-                  <h3><i class="fa fa-envelope"></i>Sign up to Newsletter</h3>
-                </div>
-                <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                  <form class="ps-subscribe__form" action="http://nouthemes.com/html/trueshoes/do_action" method="post">
-                    <input class="form-control" type="text" placeholder="">
-                    <button>Sign up now</button>
-                  </form>
-                </div>
-                <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
-                  <p>...and receive  <span>$20</span>  coupon for first shopping.</p>
-                </div>
-          </div>
-        </div>
-      </div>
-     
+      
     </main>
 @stop()

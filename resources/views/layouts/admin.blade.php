@@ -41,7 +41,7 @@
                 <ul class="nav" id="main-menu">
                     <li>
                         <div class="user-img-div">
-                            <img src="{{asset('/public/admin')}}/img/user.png" class="img-thumbnail" />
+                            <img src="{{url('uploads/user')}}/{{Auth::guard('admin')->user()->image}}" class="img-thumbnail" />
                             <div class="inner-text">
                                Admin: {{Auth::guard('admin')->user()->name}}
                             <br />

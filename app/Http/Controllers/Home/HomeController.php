@@ -20,7 +20,7 @@
 				View::share(
 				[		
         			'cart' => new Cart(),
-        			'blog'=>Blog::paginate(5),	
+        			'blog'=>Blog::paginate(1),	
 		  	 	 ]);
 
 				return $next($request);
@@ -41,13 +41,11 @@
 		{
 			return view('home.blog');
 		}
-		public function get_blog_detail()
-		{
-			return view('home.blog-detail');
-		}	
+		
 		public function get_b_detail($id){
 			return view('home.blog-detail',[
-				'blog'=>Blog::find($id)
+				'blog'=>Blog::find($id),
+				'comments' => Comment::where('blog_id',$id)->paginate(2)
 			]);
 		}
 		// comment

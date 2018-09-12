@@ -164,7 +164,7 @@
     </div>
     <main class="ps-main">
 
-     
+      @if(request()->is('/'))
       <div id="slide" class="carousel slide" data-ride="carousel" >
         <ol class="carousel-indicators">
           <li data-target="#slide" data-slide-to="0" class=""></li>
@@ -202,6 +202,7 @@
         <a class="left carousel-control" href="#slide" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
         <a class="right carousel-control" href="#slide" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
+      @endif
 
       <!-- Main-->
       @yield('main')  
