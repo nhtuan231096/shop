@@ -34,7 +34,7 @@
                     </div>
                   </div>
                   <div class="ps-comments">
-                    <h3>Comment(4)</h3>
+                    <h3>Comment({{$blog->comment->count()}})</h3>
                     @foreach($blog->comment as $cmt)
                     <div class="ps-comment">
                       <div class="ps-comment__thumbnail"><img src="{{url('uploads/user')}}/{{$cmt->user->image}}" alt="Ảnh đại diện"></div>
