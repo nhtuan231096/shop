@@ -8,16 +8,16 @@
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
                 @foreach($blog as $bg)
                   <div class="ps-post--2">
-                    <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="{{route('blog-detail',['id'=>$bg->id])}}"></a>
+                    <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="{{route('b-detail',['id'=>$bg->id])}}"></a>
                     <img src="{{url('uploads')}}/{{$bg->image}}" alt=""></div>
                     <div class="ps-post__container">
-                      <header class="ps-post__header"><a class="ps-post__title" href="{{route('blog-detail',['id'=>$bg->id])}}">{{$bg->name}}</a>
-                        <p>Posted by <a href="{{route('blog-detail')}}">{{$bg->author}}</a> on {{ date('d/m/Y',strtotime($bg->created_at ))}} in <a href="{{route('blog-detail')}}"> Shoes</a> , <a href="{{route('blog-detail')}}">Stylish</a></p>
+                      <header class="ps-post__header"><a class="ps-post__title" href="{{route('b-detail',['id'=>$bg->id])}}">{{$bg->name}}</a>
+                        <p>Posted by <a href="">{{$bg->author}}</a> on {{ date('d/m/Y',strtotime($bg->created_at ))}} in <a href="{{route('blog-detail')}}"> Shoes</a> , <a href="{{route('blog-detail')}}">Stylish</a></p>
                       </header>
                       <div class="ps-post__content">
                         <p> {!! $bg->content!!}</p>
                       </div>
-                      <footer class="ps-post__footer"><a class="ps-post__morelink" href="{{route('blog-detail',['id'=>$bg->id])}}">READ MORE<i class="ps-icon-arrow-left"></i></a>
+                      <footer class="ps-post__footer"><a class="ps-post__morelink" href="{{route('b-detail',['id'=>$bg->id])}}">READ MORE<i class="ps-icon-arrow-left"></i></a>
                         <div class="ps-post__actions"><span><i class="fa fa-comments"></i> 23 Comments</span><span><i class="fa fa-heart"></i>  likes</span>
                           <div class="ps-post__social"><i class="fa fa-share-alt"></i><a href="#">Share</a>
                             <ul>

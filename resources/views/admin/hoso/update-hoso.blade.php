@@ -8,7 +8,7 @@
 			<a href="{{ route('hoso')}}" class="btn btn-sm btn-info">Back</a>
 		</div>
 		<div class="panel-body">	
-		<form action="" method="POST" role="form">
+		<form action="" method="POST" role="form" enctype="multipart/form-data">
 		
 		<div class="form-group">
 			<label for="">Full name</label>
@@ -36,6 +36,17 @@
 		@if($errors->has('password'))
 		<div class="helper-box">
 			<p>{{ $errors->first('password')}}</p>
+		</div>
+		@endif
+		<div class="form-group">
+			<label for="">Ảnh đại diện</label>
+			<div class="clearfix"></div>
+			<img width="100px" src="{{url('uploads/user')}}/{{$ho_so->image}}" alt="image">
+			<input type="file" class="form-control" name="file_upload">
+		</div>
+		@if($errors->has('file_upload'))
+		<div class="helper-box">
+			<p>{{ $errors->first('file_upload')}}</p>
 		</div>
 		@endif
 		<div class="form-group">

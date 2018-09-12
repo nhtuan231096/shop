@@ -18,6 +18,9 @@ Route::group(['prefix' => '','namespace' => 'Home'],function()
 	Route::get('/blog.html','HomeController@get_blog')->name('blogs');
 //ROUTE BLOGS DETAIL
 	Route::get('/blog-detail.html','HomeController@get_blog_detail')->name('blog-detail');
+	Route::get('/b-detail/{id}.html','HomeController@get_b_detail')->name('b-detail');
+// ROUTE COMMENT
+	Route::post('blog-detail/comment','HomeController@post_comment')->name('post_comment');
 //ROUTE CONTACT
 	Route::get('/contact.html','HomeController@get_contact')->name('contact');
 //ROUTE LIST PRODUCTS

@@ -36,6 +36,7 @@
 				<th>Stt</th>
 				<th>Name</th>
 				<th>Email</th>
+				<th>Image</th>
 				<th>Phone</th>
 				<th>Address</th>
 				<th>Gender</th>
@@ -52,6 +53,7 @@
 					<td>{{ $key+1 }}</td>
 					<td>{{ $hs->name }}</td>
 					<td>{{ $hs->email }}</td>
+					<td><img width="50px" src="{{url('uploads/user')}}/{{$hs->image}}" alt="image"></td>
 					<td>{{ $hs->phone }}</td>
 					<td>{{ $hs->address }}</td>
 					<td>{{ $hs->gender }}</td>

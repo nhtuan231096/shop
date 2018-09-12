@@ -5,16 +5,15 @@
       <div class="ps-blog-grid pt-80 pb-80">
         <div class="ps-container">
           <div class="row">
-             @foreach($blog as $bg)
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
                   <div class="ps-post--detail">
-                    <div class="ps-post__thumbnail"><img src="{{url('uploads')}}/{{$bg->image}}" alt=""></div>
+                    <div class="ps-post__thumbnail"><img src="{{url('uploads')}}/{{$blog->image}}" alt=""></div>
                     <div class="ps-post__header">
-                      <h3 class="ps-post__title">{{$bg->name}}</h3>
-                      <p class="ps-post__meta">Posted by <a href="">{{$bg->author}}</a> on {{ date('d/m/Y',strtotime($bg->created_at ))}} in <a href="">Shoes</a> , <a href="">Stylish</a></p>
+                      <h3 class="ps-post__title">{{$blog->name}}</h3>
+                      <p class="ps-post__meta">Posted by <a href="">{{$blog->author}}</a> on {{ date('d/m/Y',strtotime($blog->created_at ))}} in <a href="">Shoes</a> , <a href="">Stylish</a></p>
                     </div>
                     <div class="ps-post__content">
-                      <p>{!!$bg->description!!}</p>
+                      <p>{!!$blog->description!!}</p>
                       <blockquote>
                         <p>It seems from the moment you begin to take your love of astronomy seriously, the thing that is on your mind is what kind of telescope will you get. And there is no question, investing in a good telescope can really enhance your enjoyment of your new passion in astronomy.</p>
                         <p class="author">Rodney <br> <span>Cannon</span></p>
@@ -34,28 +33,20 @@
                       </div>
                     </div>
                   </div>
-                  <div class="ps-author">
-                    <div class="ps-author__thumbnail"><img src="{{url('public')}}/home/images/user/1.jpg" alt=""></div>
-                    <div class="ps-author__content">
-                      <header>
-                        <h4>MARK GREY</h4>
-                        <p>WEB DESIGNER</p>
-                      </header>
-                      <p>The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy. The device uses the launch and continued operation of the Hubble space telescope probably.</p>
-                    </div>
-                  </div>
                   <div class="ps-comments">
                     <h3>Comment(4)</h3>
+                    @foreach($blog->comment as $cmt)
                     <div class="ps-comment">
-                      <div class="ps-comment__thumbnail"><img src="{{url('public')}}/home/images/user/2.jpg" alt=""></div>
+                      <div class="ps-comment__thumbnail"><img src="{{url('uploads/user')}}/{{$cmt->user->image}}" alt="Ảnh đại diện"></div>
                       <div class="ps-comment__content">
                         <header>
-                          <h4>MARK GREY <span>(15 minutes ago)</span></h4><a href="#">Reply<i class="ps-icon-arrow-left"></i></a>
+                          <h4>{{$cmt->user->name}} <span>({{$cmt->created_at}})</span></h4><a href="#">Reply<i class="ps-icon-arrow-left"></i></a>
                         </header>
-                        <p>The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy. The device uses the launch and continued operation of the Hubble space telescope probably.</p>
+                        <p>{{$cmt->comment}}</p>
                       </div>
                     </div>
-                    <div class="ps-comment ps-comment--reply">
+                    @endforeach
+                    <!-- <div class="ps-comment ps-comment--reply">
                       <div class="ps-comment__thumbnail"><img src="{{url('public')}}/home/images/user/3.jpg" alt=""></div>
                       <div class="ps-comment__content">
                         <header>
@@ -63,52 +54,36 @@
                         </header>
                         <p>The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy. The device uses  continue ace explore.</p>
                       </div>
-                    </div>
-                    <div class="ps-comment">
-                      <div class="ps-comment__thumbnail"><img src="{{url('public')}}/home/images/user/4.jpg" alt=""></div>
-                      <div class="ps-comment__content">
-                        <header>
-                          <h4>MARK GREY <span>(1 day ago)</span></h4><a href="#">Reply<i class="ps-icon-arrow-left"></i></a>
-                        </header>
-                        <p>The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy. The device uses the launch and continued operation of the Hubble space telescope probably.</p>
-                      </div>
-                    </div>
+                    </div> -->
                   </div>
-                  <form class="ps-form--comment" action="http://nouthemes.com/html/trueshoes/do_action" method="post">
+                  @if(Auth::check())
+                  <form class="ps-form--comment" action="{{route('post_comment')}}" method="post">
                     <h3>LEAVE A COMMENT</h3>
                     <div class="row">
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <div class="form-group">
-                              <input class="form-control" type="text" placeholder="Your Name">
-                            </div>
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <div class="form-group">
-                              <input class="form-control" type="email" placeholder="E-mail">
-                            </div>
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <div class="form-group">
-                              <input class="form-control" type="text" placeholder="Subject">
-                            </div>
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <div class="form-group">
-                              <input class="form-control" type="text" placeholder="Phone Number">
-                            </div>
-                          </div>
                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                             <div class="form-group">
-                              <textarea class="form-control" rows="6" placeholder="Text your message here..."></textarea>
+                              <textarea class="form-control" rows="6" name="comment" placeholder="Text your message here..."></textarea>
+                              @if($errors->has('comment'))
+                              <div class="help-block">{{$errors->first('comment')}}</div>
+                              @endif
                             </div>
+                            <input type="hidden" name="blog_id" value="{{$blog->id}}">
                           </div>
                     </div>
+                    @csrf
                     <div class="form-group">
-                      <button class="ps-btn ps-btn--sm ps-contact__submit">Send Message<i class="ps-icon-next"></i></button>
+                      <button class="ps-btn ps-btn--sm ps-contact__submit">Send<i class="ps-icon-next"></i></button>
                     </div>
                   </form>
+                  @else
+                  <div class="jumbotron">
+                    <div class="container text-center">
+                      <h2><i><a href="{{route('dangnhap')}}">Đăng nhập</a> để có thể bình luận</i></h2>
+                    </div>
+                  </div>
+                  @endif
                 </div>
-              @endforeach
+
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
                   <aside class="ps-widget--sidebar ps-widget--search">
                     <form class="ps-search--widget" action="http://nouthemes.com/html/trueshoes/do_action" method="post">

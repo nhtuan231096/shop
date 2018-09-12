@@ -4,14 +4,14 @@
 	/**
 	 * 
 	 */
-	class Blog extends Model
+	class Comment extends Model
 	{
-		protected $table = 'blog';
+		protected $table = 'comment';
 		protected $fillable = [
-			'name','image','author','content','description','status','created_at','updated_at'];
+			'user_id','blog_id','comment'];
 	
-		public function comment(){
-			return $this->hasMany('App\Models\Comment','blog_id','id');
+		public function user(){
+			return $this->hasOne('App\Models\User','id','user_id');
 		}
 	//tim kiem
 		// public function scopeSearch($query)

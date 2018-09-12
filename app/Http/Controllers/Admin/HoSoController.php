@@ -51,10 +51,15 @@
 		// 		'comfirm_password.same' => 'Mật khẩu chưa trùng khớp!'
 
 		// 	]);
-
+			$img='';
+			if(!empty($req->hasFile('file_upload'))) {
+				$file=$req->file_upload;
+				$file->move(base_path('uploads/user'),$file->getClientOriginalName());
+				$img=$file->getClientOriginalName();
+			}
 				$pass=bcrypt($req->password);
 				$req->offsetUnset('password');
-				$req->merge(['password' => $pass]);
+				$req->merge(['password' => $pass,'image'=>$img]);
 
 			if(User::create($req->all()))
 			{
@@ -104,7 +109,16 @@
 			// 	'parent.required' => 'Nhóm không được bỏ trống!',
 			// 	//'mimes' => 'Ảnh phải có định dạng:jpg,png,..!',
 			// ]);
-
+			$user=User::find($id);
+			$img=$user->image;
+			if(!empty($req->hasFile('file_upload'))) {
+				$file=$req->file_upload;
+				$file->move(base_path('uploads/user'),$file->getClientOriginalName());
+				$img=$file->getClientOriginalName();
+			}
+				$pass=bcrypt($req->password);
+				$req->offsetUnset('password');
+				$req->merge(['password' => $pass,'image'=>$img]);
 			if(User::find($id)->update($req->all()))
 			{
 				return redirect()->route('hoso')->with('success','Cập nhật thành công!');

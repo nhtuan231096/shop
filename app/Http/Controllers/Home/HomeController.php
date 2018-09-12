@@ -2,11 +2,13 @@
 	namespace App\Http\Controllers\Home;
 	use App\Http\Controllers\Controller;
 	use View;
+	use Auth;
 	use DB;
 	use App\Helper\Cart;
 	use App\Models\Category;
 	use App\Models\Product;
 	use App\Models\Blog;
+	use App\Models\Comment;
 	use Illuminate\Http\Request;
 	class HomeController extends Controller
 	{
@@ -43,6 +45,24 @@
 		{
 			return view('home.blog-detail');
 		}	
+		public function get_b_detail($id){
+			return view('home.blog-detail',[
+				'blog'=>Blog::find($id)
+			]);
+		}
+		// comment
+		public function post_comment(Request $req){
+			$this->validate($req,[
+				'comment'=>'required'
+			],[
+				'comment.required'=>'Bạn chưa nhập comment'
+			]);
+			$req->merge(['user_id'=>Auth::user()->id]);
+			Comment::create($req->all());
+			return redirect()->back();
+		}
+
+
 		public function get_contact()
 		{
 			return view('home.contact');

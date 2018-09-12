@@ -11,6 +11,9 @@
 	use App\Helper\Cart;
 	use View;
 	use Auth;
+	use Mail;
+	use App\Mail\SendMail;
+	use Illuminate\Mail\Mailable;
 
 	class OrderController extends Controller
 	{
@@ -65,6 +68,8 @@
 						if($datas)
 							{
 								if(Order_detail::insert($datas)){
+									Mail::to('caubebutchi.0011@gmail.com')->send(new SendMail());
+									$cart->clear();
 									return redirect()->route('order-success')->with('success','Đặt hàng thành công!');
 								}else{
 									$order->delete();
